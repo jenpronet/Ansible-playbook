@@ -13,19 +13,19 @@
         enable: yes
      - melanzar el archivo web
        copy:
-	 sc: index.html
-	Dest: /var/www/html/index.html
+	 src: page.html
+	 dest: /var/www/html/index.html
 
-   -name: configuracion de la base de datos
-    Hosts: grupodb
-   Become: yes
-    Tasks:
--	Name: Instalar MySQL server
-Yum: 
-	Name: mariadb-server
-State: present
--	Name: conectar mariadb service
-Service:
-	Name: mariadb
-	State: started
-	Enabled: yes
+- name: configuracion de la base de datos
+  hosts: grupodb
+  become: yes
+  tasks:
+    - name: Instalar MySQL server
+      yum: 
+        name: mariadb-server
+        state: present
+     - name: conectar mariadb service
+       service:
+         name: mariadb
+         state: started
+         enabled: yes
