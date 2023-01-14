@@ -1,31 +1,37 @@
-- name: Configuracion del servidor web
+---
+- name: configuracion del servidor web
   hosts: grupoweb
   become: yes
   tasks:
-    - name: Instalar Apache httpd
-      yum: 
-	     name: httpd
-       state: present
-    - name: Conectar HTTPD
+    - name: Instalar Apache httpd 
+      yum:
+         name: httpd
+         state: present
+    - name: conectar HTTPD
       service:
-	      name: httpd
+        name: httpd
         state: started
-        enable: yes
-     - name: lanzar el archivo web
-       copy:
-	 src: page.html
-	 dest: /var/www/html/index.html
+        enabled: yes
+
+    - name: copiar archivo web
+      copy:
+        src: page.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
 
 - name: configuracion de la base de datos
   hosts: grupodb
   become: yes
   tasks:
     - name: Instalar MySQL server
-      yum: 
-        name: mariadb-server
-        state: present
-     - name: conectar mariadb service
-       service:
+      yum:
+         name: mariadb-server
+         state: present
+    - name: conectar mariadb service
+      service:
          name: mariadb
          state: started
          enabled: yes
