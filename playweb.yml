@@ -1,0 +1,31 @@
+- name: Configuracion del servidor web
+  hosts: grupoweb
+  become: yes
+  tasks:
+    - name: Instalar Apache httpd
+      yum: 
+	     name: httpd
+       state: present
+    - name: Conectar HTTPD
+      service:
+	      name: httpd
+        state: started
+        enable: yes
+     - melanzar el archivo web
+       copy:
+	 sc: index.html
+	Dest: /var/www/html/index.html
+
+   -name: configuracion de la base de datos
+    Hosts: grupodb
+   Become: yes
+    Tasks:
+-	Name: Instalar MySQL server
+Yum: 
+	Name: mariadb-server
+State: present
+-	Name: conectar mariadb service
+Service:
+	Name: mariadb
+	State: started
+	Enabled: yes
