@@ -3,17 +3,19 @@
   become: yes
   tasks:
     - name: Instalar Apache httpd
-      yum: 
-	     name: httpd
-       state: present
+      ansible.builtin.yum: 
+	name: httpd
+       	state: present
+
     - name: Conectar HTTPD
       service:
-	      name: httpd
+	name: httpd
         state: started
         enable: yes
-     - name: lanzar el archivo web
-       copy:
-	 src: page.html
+     
+    - name: lanzar el archivo web
+      copy:
+	 src: index.html
 	 dest: /var/www/html/index.html
 
 - name: configuracion de la base de datos
@@ -21,10 +23,11 @@
   become: yes
   tasks:
     - name: Instalar MySQL server
-      yum: 
+      ansible.builtin.yum: 
         name: mariadb-server
         state: present
-     - name: conectar mariadb service
+
+    - name: conectar mariadb service
        service:
          name: mariadb
          state: started
