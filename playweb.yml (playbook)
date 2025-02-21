@@ -11,7 +11,7 @@
 	      name: httpd
         state: started
         enable: yes
-     - melanzar el archivo web
+     - name: lanzar el archivo web
        copy:
 	 src: page.html
 	 dest: /var/www/html/index.html
